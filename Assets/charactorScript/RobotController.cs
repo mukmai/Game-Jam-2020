@@ -6,30 +6,32 @@ using UnityEngine.AI;
 public class RobotController : MonoBehaviour
 {
     public NavMeshAgent agent;
+    Animator _animator;
 
     public Transform player;
     
     public float lookRadius = 10f;
     void Start()
     {
-        
+        _animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         float distanceBtw = Vector3.Distance(transform.position, player.transform.position);
-        
-        if (distanceBtw < lookRadius)
+
+        if (agent.stoppingDistance >= distanceBtw)
         {
-            FaceTarget();
-            agent.SetDestination(player.transform.position);
+            agent.SetDestination(transform.position);
+            _animator.SetBool("isWalk",false);
         }
         else
         {
-            agent.SetDestination(transform.position);
+            FaceTarget();
+            agent.SetDestination(player.transform.position);
+            _animator.SetBool("isWalk",true);
         }
-        
     }
     
     void OnDrawGizmosSelected()
