@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour
     {
         // Create a layer mask for the floor layer.
         floorMask = LayerMask.GetMask ("Floor");
-
-        anim = GetComponent <Animator> ();
+        
+        anim = GetComponentInChildren <Animator> ();
         playerRigidbody = GetComponent <Rigidbody> ();
     }
 
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
 
         Turning ();
 
-        //Animating (h, v);
+        Animating (h, v);
     }
 
     void Move (float h, float v)
@@ -80,7 +80,7 @@ public class PlayerController : MonoBehaviour
     {
         bool walking = h != 0f || v != 0f;
 
-        anim.SetBool ("IsWalking", walking);
+        anim.SetBool ("isWalk", walking);
     }
 
     void crossHairFollow()
