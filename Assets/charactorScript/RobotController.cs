@@ -15,7 +15,7 @@ public class RobotController : MonoBehaviour
 
     private Vector3 targetPosition;
 
-    public bool _following = false;
+    public bool _following = true;
     [SerializeField] private crossHairPos _crossHair;
     private BBGun _gun;
     
