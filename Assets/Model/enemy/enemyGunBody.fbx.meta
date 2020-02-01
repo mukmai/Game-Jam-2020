@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: fdee10c6c61e34949abd14806d8ea591
+guid: 057df09ff15b1b649b4955d41125837f
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: enemyGun_palette1
+    second: {fileID: 2100000, guid: 315504fee560eca4a864f5bb30d8de01, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
