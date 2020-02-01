@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -15,6 +16,15 @@ public class PlayerController : MonoBehaviour
 
     public GameObject crossHair;
 
+    public GameObject robot1;
+    public GameObject robot2;
+    public GameObject robot3;
+
+    private bool robot1Stay;
+    private bool robot2Stay;
+    private bool robot3Stay;
+    
+
     void Awake ()
     {
         // Create a layer mask for the floor layer.
@@ -24,9 +34,16 @@ public class PlayerController : MonoBehaviour
         playerRigidbody = GetComponent <Rigidbody> ();
     }
 
+    private void Start()
+    {
+        robot1Stay = false;
+        robot2Stay = false;
+        robot3Stay = false;
+    }
+
     void Update()
     {
-        crossHairFollow();
+        Turning();
     }
 
 
@@ -36,8 +53,6 @@ public class PlayerController : MonoBehaviour
         float v = Input.GetAxisRaw ("Vertical");
 
         Move (h, v);
-
-        Turning ();
 
         Animating (h, v);
     }
@@ -59,8 +74,11 @@ public class PlayerController : MonoBehaviour
 
         if(Physics.Raycast (camRay, out floorHit, camRayLength, floorMask))
         {
-            //crossHair.SetActive(true);
-            //crossHair.transform.position = floorHit.point + Vector3.up * 0.1f;
+            crossHair.SetActive(true);
+            crossHair.transform.position = floorHit.point + Vector3.up * 0.1f;
+            crossHair.transform.rotation = Quaternion.Euler(90,0,0);
+
+            robotOrder(floorHit.point);
             
             Vector3 playerToMouse = floorHit.point - transform.position;
 
@@ -70,10 +88,10 @@ public class PlayerController : MonoBehaviour
 
             playerRigidbody.MoveRotation (newRotation);
         }
-        //else
-        //{
-            //crossHair.SetActive(false);
-        //}
+        else
+        {
+            crossHair.SetActive(false);
+        }
     }
 
     void Animating (float h, float v)
@@ -83,21 +101,34 @@ public class PlayerController : MonoBehaviour
         anim.SetBool ("isWalk", walking);
     }
 
-    void crossHairFollow()
+    void robotOrder(Vector3 targetPosition)
     {
-        Ray camRay = Camera.main.ScreenPointToRay (Input.mousePosition);
-
-        RaycastHit floorHit;
-
-        if (Physics.Raycast(camRay, out floorHit, camRayLength, floorMask))
+        if (Input.GetKeyDown("1"))
         {
-            crossHair.SetActive(true);
-            crossHair.transform.position = floorHit.point + Vector3.up * 0.1f;
-            crossHair.transform.rotation = Quaternion.Euler(90,0,0);
+            robot1Stay = !robot1Stay;
+            if (robot1Stay)
+            {
+                robot1.GetComponent<RobotController>().stayAtPosition(targetPosition);
+            }else robot1.GetComponent<RobotController>().freePosition();
         }
-        else
+
+        if (Input.GetKeyDown("2"))
         {
-            crossHair.SetActive(false);
+            robot2Stay = !robot2Stay;
+            if (robot2Stay)
+            {
+                robot2.GetComponent<RobotController>().stayAtPosition(targetPosition);
+            }else robot2.GetComponent<RobotController>().freePosition();
+        }
+        
+        if (Input.GetKeyDown("3"))
+        {
+            robot3Stay = !robot3Stay;
+            if (robot3Stay)
+            {
+                robot3.GetComponent<RobotController>().stayAtPosition(targetPosition);
+            }else robot3.GetComponent<RobotController>().freePosition();
         }
     }
+    
 }
