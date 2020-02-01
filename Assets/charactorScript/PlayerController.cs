@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class PlayerController : MonoBehaviour
     public int healAmount = 10;
     public float healTime = 0.5f;
     private float _currHealTime = 0.5f;
+
+    public Image healthBarPrefab;
     
     private StateManager _stateManager;
     
@@ -104,6 +107,9 @@ public class PlayerController : MonoBehaviour
         {
             StopHealing();
         }
+        
+        healthBarPrefab.fillAmount = GetComponent<Health>().SendHp();
+        
     }
 
     void StopHealing()

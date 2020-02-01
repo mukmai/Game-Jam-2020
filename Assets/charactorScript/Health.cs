@@ -14,6 +14,8 @@ public class Health : MonoBehaviour
     public int currHealth;
     private Image _bar;
 
+    private Animator _animator;
+
     private void OnEnable()
     {
         if (!_initialized)
@@ -23,6 +25,8 @@ public class Health : MonoBehaviour
             currHealth = maxHealth;
             _bar = _healthBar.GetComponentsInChildren<Image>()[1];
             _healthBar.transform.SetParent(transform);
+
+            _animator = GetComponentInChildren<Animator>();
         }
     }
 
@@ -47,10 +51,13 @@ public class Health : MonoBehaviour
                 if (gameObject.name == "player")
                 {
                     // TODO: game over
+                    _animator.SetBool("isDead",true);
                 }
                 else
                 {
                     // shut down robot
+                    _animator.SetBool("isDead",true);
+                    _healthBar.SetActive(false);
                     gameObject.GetComponent<RobotController>().Break();
                 }
             }
@@ -68,5 +75,10 @@ public class Health : MonoBehaviour
     {
         currHealth = Math.Min(maxHealth, currHealth + val);
         _bar.fillAmount = (float) currHealth / maxHealth;
+    }
+
+    public float SendHp()
+    {
+        return (float)currHealth / maxHealth;
     }
 }

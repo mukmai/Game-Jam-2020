@@ -154,6 +154,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  crossHairPrefab: {fileID: 4346478951157612395, guid: 54d08f3717ce7104e861e9062257cec2,
+  crossHairPrefab: {fileID: 4346478951157612395, guid: 45ed82f93ee346f44a4c82a99800668d,
     type: 3}
   damage: 20
