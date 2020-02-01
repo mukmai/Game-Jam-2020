@@ -22,6 +22,7 @@ public class Health : MonoBehaviour
             _healthBar = Instantiate(healthBarPrefab, transform.position + Vector3.up, Quaternion.identity);
             currHealth = maxHealth;
             _bar = _healthBar.GetComponentsInChildren<Image>()[1];
+            _healthBar.transform.SetParent(transform);
         }
     }
 
@@ -31,6 +32,7 @@ public class Health : MonoBehaviour
         if (_initialized)
         {
             _healthBar.transform.position = transform.position + Vector3.up;
+            _healthBar.transform.rotation = Quaternion.identity;
         }
     }
 
@@ -42,7 +44,14 @@ public class Health : MonoBehaviour
         {
             if (gameObject.layer == LayerMask.NameToLayer("Player"))
             {
-                // TODO: player dead
+                if (gameObject.name == "player")
+                {
+                    // TODO: game over
+                }
+                else
+                {
+                    // shut down robot
+                }
             }
             else if (gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
@@ -51,7 +60,6 @@ public class Health : MonoBehaviour
                     room.EnemyDead();
                 Destroy(gameObject);
             }
-            Destroy(_healthBar);
         }
     }
 
