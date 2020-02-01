@@ -7,20 +7,20 @@ using UnityEngine.Experimental.PlayerLoop;
 public class RoomManager : MonoBehaviour
 {
     public DoorControl[] doors;
-    public GameObject[] enemys;
+    public EnemyMovement[] enemys;
     public int enemyCount = 0;
     private bool roomBegan = false;
 
     private void Start()
     {
-        foreach (DoorControl door in doors)
+        foreach (var door in doors)
         {
             door.room = this;
         }
 
         foreach (var enemy in enemys)
         {
-            
+            enemy.room = this;
         }
 
         enemyCount = enemys.Length;
