@@ -18,6 +18,7 @@ public class BBGun : MonoBehaviour
     private void OnEnable()
     {
         _gunHead = GetComponentInChildren<Transform>();
+        Physics.IgnoreLayerCollision(13, 0);
     }
 
     // Update is called once per frame
@@ -57,7 +58,6 @@ public class BBGun : MonoBehaviour
     {
         if (other.gameObject.layer != LayerMask.NameToLayer("Enemy")) return;
         foundEnemy = true;
-        Debug.Log("B");
         if (Vector3.Distance(closestEnemy, transform.position) >
             Vector3.Distance(other.transform.position, transform.position))
         {

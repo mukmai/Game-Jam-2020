@@ -21,6 +21,7 @@ public class RoomManager : MonoBehaviour
         foreach (var enemy in enemys)
         {
             enemy.room = this;
+            enemy.gameObject.SetActive(false);
         }
 
         enemyCount = enemys.Length;
@@ -42,7 +43,10 @@ public class RoomManager : MonoBehaviour
         }
 
         roomBegan = true;
-        // TODO: start up enemy
+        foreach (var enemy in enemys)
+        {
+            enemy.gameObject.SetActive(true);
+        }
     }
 
     public void EnemyDead()
@@ -52,6 +56,7 @@ public class RoomManager : MonoBehaviour
 
     void EndRoom()
     {
+        Debug.Log("Room clear");
         foreach (DoorControl door in doors)
         {
             door.Unlock();

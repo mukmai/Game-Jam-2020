@@ -11,15 +11,33 @@ public class EnemyShooter : MonoBehaviour
     private Transform _gunHead;
     [SerializeField] private Transform target;
     public float bulletVelocity = 12.0f;
+    private StateManager _stateManager;
+    private bool _initialized = false;
 
     private void OnEnable()
     {
+        if (!_initialized)
+        {
+            Initialize();
+        }
+    }
+
+    void Initialize()
+    {
         _gunHead = GetComponentInChildren<Transform>();
+        _stateManager = GameObject.Find("/StateManager").GetComponent<StateManager>();
+        target = _stateManager.EnemyGetTarget();
+        _initialized = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!_initialized)
+        {
+            Initialize();
+        }
+        
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
         if (_currCooldown <= 0.0f)
         {
@@ -35,10 +53,10 @@ public class EnemyShooter : MonoBehaviour
 
     void Shoot()
     {
-        // TODO: choose target
         var bullet = Instantiate(bulletPrefab, _gunHead.position, transform.rotation);
         Vector3 dir = target.position - bullet.transform.position;
         dir -= new Vector3(0, dir.y, 0);
         bullet.GetComponent<Rigidbody>().velocity = dir.normalized * bulletVelocity;
+        target = _stateManager.EnemyGetTarget();
     }
 }

@@ -10,15 +10,32 @@ public class EnemyLauncher : MonoBehaviour
     public Transform _gunHead;
     [SerializeField] private Transform target;
     public float missileVelocity = 30.0f;
+    private StateManager _stateManager;
+    private bool _initialized = false;
 
     private void OnEnable()
     {
+        if (!_initialized)
+        {
+            Initialize();
+        }
+    }
+    
+    void Initialize()
+    {
         _gunHead = GetComponentsInChildren<Transform>()[1];
+        _stateManager = GameObject.Find("/StateManager").GetComponent<StateManager>();
+        target = _stateManager.EnemyGetTarget();
+        _initialized = true;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!_initialized)
+        {
+            Initialize();
+        }
         if (_currCooldown <= 0.0f)
         {
             if (Random.Range(0, 5) == 0)
@@ -33,11 +50,9 @@ public class EnemyLauncher : MonoBehaviour
 
     void Shoot()
     {
-        // TODO: choose target
         var missile = Instantiate(missilePrefab, _gunHead.position, Quaternion.identity);
-        //missile.transform.rotation = Quaternion.Euler(0,0,90.0f);
         missile.GetComponent<Rigidbody>().velocity = Vector3.up * missileVelocity;
-        // TODO: set missile target
         missile.GetComponent<Missile>().target = target;
+        target = _stateManager.EnemyGetTarget();
     }
 }
