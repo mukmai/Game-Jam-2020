@@ -25,6 +25,7 @@ public class EnemyLauncher : MonoBehaviour
     {
         _gunHead = GetComponentsInChildren<Transform>()[1];
         _stateManager = GameObject.Find("/StateManager").GetComponent<StateManager>();
+        target = _stateManager.EnemyGetTarget();
         _initialized = true;
     }
 
@@ -35,7 +36,6 @@ public class EnemyLauncher : MonoBehaviour
         {
             Initialize();
         }
-        target = _stateManager.EnemyGetTarget();
         if (_currCooldown <= 0.0f)
         {
             if (Random.Range(0, 5) == 0)
@@ -52,7 +52,7 @@ public class EnemyLauncher : MonoBehaviour
     {
         var missile = Instantiate(missilePrefab, _gunHead.position, Quaternion.identity);
         missile.GetComponent<Rigidbody>().velocity = Vector3.up * missileVelocity;
-        // TODO: set missile target
         missile.GetComponent<Missile>().target = target;
+        target = _stateManager.EnemyGetTarget();
     }
 }

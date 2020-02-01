@@ -18,6 +18,7 @@ public class BBGun : MonoBehaviour
     private void OnEnable()
     {
         _gunHead = GetComponentInChildren<Transform>();
+        Physics.IgnoreLayerCollision(13, 0);
     }
 
     // Update is called once per frame

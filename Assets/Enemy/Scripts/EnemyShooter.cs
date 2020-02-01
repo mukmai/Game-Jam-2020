@@ -26,6 +26,7 @@ public class EnemyShooter : MonoBehaviour
     {
         _gunHead = GetComponentInChildren<Transform>();
         _stateManager = GameObject.Find("/StateManager").GetComponent<StateManager>();
+        target = _stateManager.EnemyGetTarget();
         _initialized = true;
     }
 
@@ -36,7 +37,7 @@ public class EnemyShooter : MonoBehaviour
         {
             Initialize();
         }
-        target = _stateManager.EnemyGetTarget();
+        
         transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
         if (_currCooldown <= 0.0f)
         {
@@ -56,5 +57,6 @@ public class EnemyShooter : MonoBehaviour
         Vector3 dir = target.position - bullet.transform.position;
         dir -= new Vector3(0, dir.y, 0);
         bullet.GetComponent<Rigidbody>().velocity = dir.normalized * bulletVelocity;
+        target = _stateManager.EnemyGetTarget();
     }
 }
