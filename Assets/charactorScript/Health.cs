@@ -46,7 +46,10 @@ public class Health : MonoBehaviour
             }
             else if (gameObject.layer == LayerMask.NameToLayer("Enemy"))
             {
-                GetComponent<EnemyMovement>().room.EnemyDead();
+                RoomManager room = GetComponent<EnemyMovement>().room;
+                if (room)
+                    room.EnemyDead();
+                Destroy(gameObject);
             }
             Destroy(_healthBar);
         }

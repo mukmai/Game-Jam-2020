@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2498855788969917605}
   - component: {fileID: 7606733481017822873}
   - component: {fileID: 3639291493421089141}
+  - component: {fileID: 8898603701692701083}
   m_Layer: 0
   m_Name: small ball
   m_TagString: Untagged
@@ -43,7 +44,7 @@ SphereCollider:
   m_GameObject: {fileID: 4526636134996725910}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.22
   m_Center: {x: 0, y: 0, z: 0}
@@ -76,6 +77,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 15
+--- !u!136 &8898603701692701083
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4526636134996725910}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.26
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7988714192328045835
 GameObject:
   m_ObjectHideFlags: 0

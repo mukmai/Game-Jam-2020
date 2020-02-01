@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 4144810416237327439}
   - component: {fileID: 4144810416237327436}
   - component: {fileID: 4144810416237327437}
-  m_Layer: 0
+  - component: {fileID: 5552337183677261065}
+  m_Layer: 11
   m_Name: down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,6 +93,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!208 &5552337183677261065
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4144810416237327411}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.5, y: 0.25, z: 0.5}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 0
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
 --- !u!1 &4144810416286624723
 GameObject:
   m_ObjectHideFlags: 0
@@ -104,7 +121,7 @@ GameObject:
   - component: {fileID: 4144810416286624751}
   - component: {fileID: 4144810416286624748}
   - component: {fileID: 4144810416286624749}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: up
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +212,7 @@ GameObject:
   - component: {fileID: 4144810416526209249}
   - component: {fileID: 4144810416526209254}
   - component: {fileID: 4144810416526209248}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -245,3 +262,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upDoor: {fileID: 4144810416286624722}
   downDoor: {fileID: 4144810416237327410}
+  room: {fileID: 0}
