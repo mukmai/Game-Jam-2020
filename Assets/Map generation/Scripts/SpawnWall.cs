@@ -10,6 +10,8 @@ public class SpawnWall : MonoBehaviour
     void Start()
     {
         int rand = Random.Range(0, objects.Length);
-        Instantiate(objects[rand], transform.position, Quaternion.identity);
+        //Instantiate(objects[rand], transform.position, Quaternion.identity);
+        
+        Instantiate(objects[rand], transform.position + Vector3.down, Quaternion.Euler(-90,0,0));
     }
 }
