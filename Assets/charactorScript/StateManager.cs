@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StateManager : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class StateManager : MonoBehaviour
     public Health[] robots;
     public int boltCount = 0;
     private List<Health> survivers = new List<Health>();
+
+    public Text boltText;
+    
     
     // Start is called before the first frame update
     void Start()
@@ -31,6 +35,8 @@ public class StateManager : MonoBehaviour
         {
             survivers.Add(player);
         }
+
+        boltText.text = ": " + boltCount;
     }
 
     public Transform EnemyGetTarget()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class RobotController : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class RobotController : MonoBehaviour
     public bool isBroken = false;
     public bool isHealing = false;
 
+    public Text statusText;
+
     void Start()
     {
         _animator = GetComponentInChildren<Animator>();
@@ -31,15 +34,18 @@ public class RobotController : MonoBehaviour
 
     void Update()
     {
+        
         if (!isBroken && !isHealing)
         {
             if (_following)
             {
+                statusText.text = "Follow";
                 targetPosition = player.transform.position;
                 agent.stoppingDistance = stopDistance;
             }
             else
             {
+                statusText.text = "Stay";
                 agent.stoppingDistance = 0;
             }
         
@@ -80,6 +86,7 @@ public class RobotController : MonoBehaviour
 
     public void Break()
     {
+        statusText.text = "Dead";
         isBroken = true;
         GetComponent<NavMeshAgent>().enabled = false;
         GetComponent<Collider>().enabled = false;
