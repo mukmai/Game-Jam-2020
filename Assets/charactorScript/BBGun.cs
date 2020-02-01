@@ -35,6 +35,7 @@ public class BBGun : MonoBehaviour
                 }
             }
 
+            closestEnemy = new Vector3(1000, 1000, 1000);
             foundEnemy = false;
         }
         else
