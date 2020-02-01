@@ -13,6 +13,7 @@ public class EnemyShooter : MonoBehaviour
     public float bulletVelocity = 12.0f;
     private StateManager _stateManager;
     private bool _initialized = false;
+    [SerializeField] private EnemyMovement body;
 
     private void OnEnable()
     {
@@ -33,24 +34,27 @@ public class EnemyShooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_initialized)
+        if (!body.isSleeping)
         {
-            Initialize();
-        }
-        
-        Vector3 direction = (target.position - transform.position).normalized;
-        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
-        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3f);
-        if (_currCooldown <= 0.0f)
-        {
-            if (Random.Range(0, 15) == 0)
+            if (!_initialized)
             {
-                Shoot();
-                _currCooldown = shootMaxCooldown;
+                Initialize();
             }
-        }
+        
+            Vector3 direction = (target.position - transform.position).normalized;
+            Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+            transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3f);
+            if (_currCooldown <= 0.0f)
+            {
+                if (Random.Range(0, 15) == 0)
+                {
+                    Shoot();
+                    _currCooldown = shootMaxCooldown;
+                }
+            }
 
-        _currCooldown -= Time.deltaTime;
+            _currCooldown -= Time.deltaTime;
+        }
     }
 
     void Shoot()

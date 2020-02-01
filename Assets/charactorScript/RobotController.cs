@@ -14,7 +14,7 @@ public class RobotController : MonoBehaviour
 
     private Vector3 targetPosition;
 
-    public bool _robotMovingToTarget = false;
+    public bool _following = false;
     [SerializeField] private crossHairPos _crossHair;
     private BBGun _gun;
     
@@ -33,7 +33,7 @@ public class RobotController : MonoBehaviour
     {
         if (!isBroken && !isHealing)
         {
-            if (!_robotMovingToTarget)
+            if (_following)
             {
                 targetPosition = player.transform.position;
                 agent.stoppingDistance = stopDistance;
@@ -58,7 +58,11 @@ public class RobotController : MonoBehaviour
             }
         }
 
-        isHealing = false;
+        if (isHealing)
+        {
+            agent.SetDestination(transform.position);
+        }
+        
     }
 
     void OnDrawGizmosSelected()
@@ -85,16 +89,16 @@ public class RobotController : MonoBehaviour
 
     public void MoveOrder(Vector3 targetPos)
     {
-        if (isBroken) return;
-        _robotMovingToTarget = !_robotMovingToTarget;
-        if (_robotMovingToTarget)
-        {
-            _crossHair.setPos(targetPos);
-            targetPosition = targetPos;
-        }
-        else
-        {
-            _crossHair.cancelSetPos();
-        }
+        if (isBroken || isHealing) return;
+        _following = false;
+        _crossHair.setPos(targetPos);
+        targetPosition = targetPos;
+    }
+
+    public void FollowOrder()
+    {
+        if (isBroken || isHealing) return;
+        _following = true;
+        _crossHair.cancelSetPos();
     }
 }

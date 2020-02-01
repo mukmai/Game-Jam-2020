@@ -21,7 +21,7 @@ public class RoomManager : MonoBehaviour
         foreach (var enemy in enemys)
         {
             enemy.room = this;
-            enemy.gameObject.SetActive(false);
+            enemy.Sleep();
         }
 
         enemyCount = enemys.Length;
@@ -48,7 +48,7 @@ public class RoomManager : MonoBehaviour
             roomBegan = true;
             foreach (var enemy in enemys)
             {
-                enemy.gameObject.SetActive(true);
+                enemy.WakeUp();
             }
         }
     }

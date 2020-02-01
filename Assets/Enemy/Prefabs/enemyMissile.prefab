@@ -1,24 +1,24 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!95 &4466995464290918483
-Animator:
-  serializedVersion: 3
+--- !u!114 &4466995465359892632
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5682445019218185914}
+  m_GameObject: {fileID: 81271125753095271}
   m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 44829edc51a490746b3eb82f0d7bdd2e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1459fb6884a0fc4db9df645f2f5d4b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shootMaxCooldown: 2
+  missilePrefab: {fileID: 8575658197862154710, guid: 6f5c60cd8facb5d4d8f3dfc792b38ca6,
+    type: 3}
+  _gunHead: {fileID: 0}
+  target: {fileID: 0}
+  missileVelocity: 17
+  body: {fileID: 4466995465114406919}
 --- !u!1 &4466995464688297961
 GameObject:
   m_ObjectHideFlags: 0
@@ -122,6 +122,7 @@ MonoBehaviour:
   nextMoveTimer: 1.5
   room: {fileID: 0}
   agent: {fileID: 4466995465114406918}
+  isSleeping: 1
 --- !u!114 &4466995465114406916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,24 +169,25 @@ MonoBehaviour:
     type: 3}
   minDrop: 3
   maxDrop: 5
---- !u!114 &4466995465359892632
-MonoBehaviour:
+--- !u!95 &4466995464290918483
+Animator:
+  serializedVersion: 3
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 81271125753095271}
+  m_GameObject: {fileID: 5682445019218185914}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1459fb6884a0fc4db9df645f2f5d4b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shootMaxCooldown: 2
-  missilePrefab: {fileID: 8575658197862154710, guid: 6f5c60cd8facb5d4d8f3dfc792b38ca6,
-    type: 3}
-  _gunHead: {fileID: 0}
-  target: {fileID: 0}
-  missileVelocity: 17
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 44829edc51a490746b3eb82f0d7bdd2e, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &4466995464524224435
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -197,46 +199,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: enemyMissile
-      objectReference: {fileID: 0}
-    - target: {fileID: -8797274355736615902, guid: 723a934ecbee73441959adaac2a8a4d5,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -0.00046
-      objectReference: {fileID: 0}
-    - target: {fileID: -8797274355736615902, guid: 723a934ecbee73441959adaac2a8a4d5,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.0043
-      objectReference: {fileID: 0}
-    - target: {fileID: -8797274355736615902, guid: 723a934ecbee73441959adaac2a8a4d5,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.29298523
-      objectReference: {fileID: 0}
-    - target: {fileID: -8797274355736615902, guid: 723a934ecbee73441959adaac2a8a4d5,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.956117
-      objectReference: {fileID: 0}
-    - target: {fileID: -8797274355736615902, guid: 723a934ecbee73441959adaac2a8a4d5,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 34.074
-      objectReference: {fileID: 0}
-    - target: {fileID: -8797274355736615902, guid: 723a934ecbee73441959adaac2a8a4d5,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8797274355736615902, guid: 723a934ecbee73441959adaac2a8a4d5,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8797274355736615902, guid: 723a934ecbee73441959adaac2a8a4d5,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -7904721589644796742, guid: 723a934ecbee73441959adaac2a8a4d5,
         type: 3}
@@ -317,6 +279,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: -8797274355736615902, guid: 723a934ecbee73441959adaac2a8a4d5,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.00046
+      objectReference: {fileID: 0}
+    - target: {fileID: -8797274355736615902, guid: 723a934ecbee73441959adaac2a8a4d5,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.0043
+      objectReference: {fileID: 0}
+    - target: {fileID: -8797274355736615902, guid: 723a934ecbee73441959adaac2a8a4d5,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.29298523
+      objectReference: {fileID: 0}
+    - target: {fileID: -8797274355736615902, guid: 723a934ecbee73441959adaac2a8a4d5,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.956117
+      objectReference: {fileID: 0}
+    - target: {fileID: -8797274355736615902, guid: 723a934ecbee73441959adaac2a8a4d5,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 34.074
+      objectReference: {fileID: 0}
+    - target: {fileID: -8797274355736615902, guid: 723a934ecbee73441959adaac2a8a4d5,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8797274355736615902, guid: 723a934ecbee73441959adaac2a8a4d5,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8797274355736615902, guid: 723a934ecbee73441959adaac2a8a4d5,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -3762381526749165615, guid: 723a934ecbee73441959adaac2a8a4d5,
         type: 3}

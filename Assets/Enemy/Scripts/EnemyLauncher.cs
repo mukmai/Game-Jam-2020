@@ -12,6 +12,7 @@ public class EnemyLauncher : MonoBehaviour
     public float missileVelocity = 30.0f;
     private StateManager _stateManager;
     private bool _initialized = false;
+    [SerializeField] private EnemyMovement body;
 
     private void OnEnable()
     {
@@ -32,20 +33,23 @@ public class EnemyLauncher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_initialized)
+        if (!body.isSleeping)
         {
-            Initialize();
-        }
-        if (_currCooldown <= 0.0f)
-        {
-            if (Random.Range(0, 5) == 0)
+            if (!_initialized)
             {
-                Shoot();
-                _currCooldown = shootMaxCooldown;
+                Initialize();
             }
-        }
+            if (_currCooldown <= 0.0f)
+            {
+                if (Random.Range(0, 5) == 0)
+                {
+                    Shoot();
+                    _currCooldown = shootMaxCooldown;
+                }
+            }
 
-        _currCooldown -= Time.deltaTime;
+            _currCooldown -= Time.deltaTime;
+        }
     }
 
     void Shoot()
@@ -55,4 +59,6 @@ public class EnemyLauncher : MonoBehaviour
         missile.GetComponent<Missile>().target = target;
         target = _stateManager.EnemyGetTarget();
     }
+    
+    
 }

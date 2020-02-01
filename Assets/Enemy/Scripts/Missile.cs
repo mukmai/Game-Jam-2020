@@ -32,13 +32,24 @@ public class Missile : MonoBehaviour
             other.GetComponent<Health>().TakeDamage(damage);
             // TODO: add explosion
             Destroy(crossHair);
+            ParticleSystem smoke = GetComponentInChildren<ParticleSystem>();
+            var emission = smoke.emission;
+            emission.rateOverTime = 0;
+            smoke.transform.SetParent(null);
+            Destroy(smoke.gameObject, 0.6f);
             Destroy(gameObject);
         }
         if (other.gameObject.layer == LayerMask.NameToLayer("Floor"))
         {
             // TODO: add explosion
             Destroy(crossHair);
+            ParticleSystem smoke = GetComponentInChildren<ParticleSystem>();
+            var emission = smoke.emission;
+            emission.rateOverTime = 0;
+            smoke.transform.SetParent(null);
+            Destroy(smoke.gameObject, 0.6f);
             Destroy(gameObject);
         }
     }
+    
 }

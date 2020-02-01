@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     public int healAmount = 10;
     public float healTime = 0.5f;
     private float _currHealTime = 0.5f;
+    private bool _shiftClicked = false;
     
     private StateManager _stateManager;
     
@@ -40,7 +41,21 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            _shiftClicked = true;
+        } else if (Input.GetKeyUp(KeyCode.LeftShift))
+        {
+            _shiftClicked = false;
+        }
+
+        if (_shiftClicked)
+        {
+            RobotFollowOrder();
+        }
+        
         Turning();
+        
         if (Input.GetKeyDown("space"))
         {
             foundHealTarget = false;
@@ -54,7 +69,7 @@ public class PlayerController : MonoBehaviour
                 float closestDist = 20000;
                 foreach (var robot in robots)
                 {
-                    if (robot.GetComponent<Health>().currHealth > 0)
+                    if (!robot.isBroken && robot.GetComponent<Health>().currHealth < robot.GetComponent<Health>().maxHealth)
                     {
                         float dist = Vector3.Distance(robot.transform.position, transform.position);
                         if (closestDist > dist)
@@ -99,6 +114,11 @@ public class PlayerController : MonoBehaviour
 
                 _currHealTime -= Time.deltaTime;
             }
+            else if (foundHealTarget && healTarget.currHealth == healTarget.maxHealth)
+            {
+                StopHealing();
+            }
+            
         }
         else
         {
@@ -153,8 +173,11 @@ public class PlayerController : MonoBehaviour
             crossHair.transform.position = floorHit.point + Vector3.up * 0.1f;
             crossHair.transform.rotation = Quaternion.Euler(90,0,0);
 
-            robotOrder(floorHit.point);
-            
+            if (!_shiftClicked)
+            {
+                RobotMoveOrder(floorHit.point);
+            }
+
             Vector3 playerToMouse = floorHit.point - transform.position;
 
             playerToMouse.y = 0f;
@@ -176,22 +199,33 @@ public class PlayerController : MonoBehaviour
         anim.SetBool ("isWalk", walking);
     }
 
-    void robotOrder(Vector3 targetPosition)
+    void RobotMoveOrder(Vector3 targetPosition)
     {
-        if (Input.GetKeyDown("1"))
+        for (int i = 0; i <= 2; i++)
         {
-            robots[0].MoveOrder(targetPosition);
-        }
-
-        if (Input.GetKeyDown("2"))
-        {
-            robots[1].MoveOrder(targetPosition);
-        }
-        
-        if (Input.GetKeyDown("3"))
-        {
-            robots[2].MoveOrder(targetPosition);
+            if (Input.GetMouseButtonDown(i))
+            {
+                robots[i].MoveOrder(targetPosition);
+            }
         }
     }
     
+    void RobotFollowOrder()
+    {
+        for (int i = 0; i <= 2; i++)
+        {
+            if (Input.GetMouseButtonDown(i))
+            {
+                robots[i].FollowOrder();
+            }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == LayerMask.NameToLayer("Lava"))
+        {
+            GetComponent<Health>().TakeDamage(100);
+        }
+    }
 }
