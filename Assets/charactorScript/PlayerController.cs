@@ -18,12 +18,15 @@ public class PlayerController : MonoBehaviour
     public GameObject robot1;
     public GameObject robot2;
     public GameObject robot3;
-
+    
+    public GameObject crossHair1;
+    public GameObject crossHair2;
+    public GameObject crossHair3;
+    
     private bool robot1Stay;
     private bool robot2Stay;
     private bool robot3Stay;
     
-
     void Awake ()
     {
         // Create a layer mask for the floor layer.
@@ -107,8 +110,14 @@ public class PlayerController : MonoBehaviour
             robot1Stay = !robot1Stay;
             if (robot1Stay)
             {
+                crossHair1.GetComponent<crossHairPos>().setPos(targetPosition);
                 robot1.GetComponent<RobotController>().stayAtPosition(targetPosition);
-            }else robot1.GetComponent<RobotController>().freePosition();
+            }
+            else
+            {
+                crossHair1.GetComponent<crossHairPos>().cancelSetPos();
+                robot1.GetComponent<RobotController>().freePosition();
+            }
         }
 
         if (Input.GetKeyDown("2"))
@@ -116,8 +125,14 @@ public class PlayerController : MonoBehaviour
             robot2Stay = !robot2Stay;
             if (robot2Stay)
             {
+                crossHair2.GetComponent<crossHairPos>().setPos(targetPosition);
                 robot2.GetComponent<RobotController>().stayAtPosition(targetPosition);
-            }else robot2.GetComponent<RobotController>().freePosition();
+            }
+            else
+            {
+                crossHair2.GetComponent<crossHairPos>().cancelSetPos();
+                robot2.GetComponent<RobotController>().freePosition();
+            }
         }
         
         if (Input.GetKeyDown("3"))
@@ -125,8 +140,14 @@ public class PlayerController : MonoBehaviour
             robot3Stay = !robot3Stay;
             if (robot3Stay)
             {
+                crossHair3.GetComponent<crossHairPos>().setPos(targetPosition);
                 robot3.GetComponent<RobotController>().stayAtPosition(targetPosition);
-            }else robot3.GetComponent<RobotController>().freePosition();
+            }
+            else
+            {
+                crossHair3.GetComponent<crossHairPos>().cancelSetPos();
+                robot3.GetComponent<RobotController>().freePosition();
+            }
         }
     }
     
