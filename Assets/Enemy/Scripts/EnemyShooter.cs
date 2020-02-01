@@ -38,7 +38,9 @@ public class EnemyShooter : MonoBehaviour
             Initialize();
         }
         
-        transform.LookAt(new Vector3(target.position.x, transform.position.y, target.position.z));
+        Vector3 direction = (target.position - transform.position).normalized;
+        Quaternion lookRotation = Quaternion.LookRotation(new Vector3(direction.x, 0, direction.z));
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 3f);
         if (_currCooldown <= 0.0f)
         {
             if (Random.Range(0, 15) == 0)

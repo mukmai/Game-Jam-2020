@@ -9,7 +9,7 @@ public class RoomManager : MonoBehaviour
     public DoorControl[] doors;
     public EnemyMovement[] enemys;
     public int enemyCount = 0;
-    private bool roomBegan = false;
+    public bool roomBegan = false;
 
     private void Start()
     {
@@ -37,15 +37,19 @@ public class RoomManager : MonoBehaviour
 
     public void BeginRoom()
     {
-        foreach (DoorControl door in doors)
+        if (!roomBegan)
         {
-            door.Lock();
-        }
+            Debug.Log("Room begin");
+            foreach (DoorControl door in doors)
+            {
+                door.Lock();
+            }
 
-        roomBegan = true;
-        foreach (var enemy in enemys)
-        {
-            enemy.gameObject.SetActive(true);
+            roomBegan = true;
+            foreach (var enemy in enemys)
+            {
+                enemy.gameObject.SetActive(true);
+            }
         }
     }
 
@@ -61,5 +65,7 @@ public class RoomManager : MonoBehaviour
         {
             door.Unlock();
         }
+
+        enabled = false;
     }
 }

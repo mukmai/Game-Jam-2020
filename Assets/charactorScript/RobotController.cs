@@ -11,46 +11,56 @@ public class RobotController : MonoBehaviour
     public Transform player;
     
     public float lookRadius = 10f;
-    
-    private bool stayingAtPosition;
 
     private Vector3 targetPosition;
+
+    public bool _robotMovingToTarget = false;
+    [SerializeField] private crossHairPos _crossHair;
+    private BBGun _gun;
     
     public int stopDistance = 2;
+
+    public bool isBroken = false;
+    public bool isHealing = false;
+
     void Start()
     {
         _animator = GetComponentInChildren<Animator>();
-        stayingAtPosition = false;
+        _gun = GetComponentInChildren<BBGun>();
     }
 
     void Update()
     {
-        if (!stayingAtPosition)
+        if (!isBroken && !isHealing)
         {
-            targetPosition = player.transform.position;
-            agent.stoppingDistance = stopDistance;
-        }
-        else
-        {
-            agent.stoppingDistance = 0;
-        }
+            if (!_robotMovingToTarget)
+            {
+                targetPosition = player.transform.position;
+                agent.stoppingDistance = stopDistance;
+            }
+            else
+            {
+                agent.stoppingDistance = 0;
+            }
         
-        float distanceBtw = Vector3.Distance(transform.position, targetPosition);
+            float distanceBtw = Vector3.Distance(transform.position, targetPosition);
 
-        if (agent.stoppingDistance+0.6 >= distanceBtw)
-        {
-            agent.SetDestination(transform.position);
-            _animator.SetBool("isWalk", false);
+            if (agent.stoppingDistance+0.6 >= distanceBtw)
+            {
+                agent.SetDestination(transform.position);
+                _animator.SetBool("isWalk", false);
+            }
+            else
+            {
+                FaceTarget(targetPosition);
+                agent.SetDestination(targetPosition);
+                _animator.SetBool("isWalk", true);
+            }
         }
-        else
-        {
-            FaceTarget(targetPosition);
-            agent.SetDestination(targetPosition);
-            _animator.SetBool("isWalk", true);
-        }
-        
+
+        isHealing = false;
     }
-    
+
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
@@ -64,15 +74,27 @@ public class RobotController : MonoBehaviour
         transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * 5f);
     }
 
-    public void stayAtPosition(Vector3 orderPosition)
+    public void Break()
     {
-        targetPosition = orderPosition;
-        
-        stayingAtPosition = true;
+        isBroken = true;
+        GetComponent<NavMeshAgent>().enabled = false;
+        GetComponent<Collider>().enabled = false;
+        _gun.enabled = false;
+        _crossHair.cancelSetPos();
     }
 
-    public void freePosition()
+    public void MoveOrder(Vector3 targetPos)
     {
-        stayingAtPosition = false;
+        if (isBroken) return;
+        _robotMovingToTarget = !_robotMovingToTarget;
+        if (_robotMovingToTarget)
+        {
+            _crossHair.setPos(targetPos);
+            targetPosition = targetPos;
+        }
+        else
+        {
+            _crossHair.cancelSetPos();
+        }
     }
 }

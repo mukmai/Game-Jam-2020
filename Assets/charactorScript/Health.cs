@@ -51,6 +51,7 @@ public class Health : MonoBehaviour
                 else
                 {
                     // shut down robot
+                    gameObject.GetComponent<RobotController>().Break();
                 }
             }
             else if (gameObject.layer == LayerMask.NameToLayer("Enemy"))
@@ -66,5 +67,6 @@ public class Health : MonoBehaviour
     public void Heal(int val)
     {
         currHealth = Math.Min(maxHealth, currHealth + val);
+        _bar.fillAmount = (float) currHealth / maxHealth;
     }
 }

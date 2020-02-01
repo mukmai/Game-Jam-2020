@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1652755567073587724}
   - component: {fileID: 3816060425934526918}
   m_Layer: 0
-  m_Name: ball
+  m_Name: mediumBall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19538e4c5afb1994383ad0074525a3a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 15
 --- !u!1 &7060278402537734710
 GameObject:
   m_ObjectHideFlags: 0
