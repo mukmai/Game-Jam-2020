@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 1361454781003903613}
   - component: {fileID: -8211497468702498014}
   m_Layer: 0
-  m_Name: missile
+  m_Name: airMissile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,3 +156,4 @@ MonoBehaviour:
   target: {fileID: 0}
   crossHairPrefab: {fileID: 4346478951157612395, guid: 54d08f3717ce7104e861e9062257cec2,
     type: 3}
+  damage: 20

@@ -14,18 +14,19 @@ public class PlayerController : MonoBehaviour
     float camRayLength = 100f;          // The length of the ray from the camera into the scene.
 
     public GameObject crossHair;
+    
+    public RobotController[] robots;
 
-    public GameObject robot1;
-    public GameObject robot2;
-    public GameObject robot3;
+    private bool healing = false;
+    public float healRange = 2;
+    Vector3 _healMoveVelocity = Vector3.zero;
+    private bool foundHealTarget = false;
+    private Health healTarget;
+    public int healAmount = 10;
+    public float healTime = 0.5f;
+    private float _currHealTime = 0.5f;
     
-    public GameObject crossHair1;
-    public GameObject crossHair2;
-    public GameObject crossHair3;
-    
-    private bool robot1Stay;
-    private bool robot2Stay;
-    private bool robot3Stay;
+    private StateManager _stateManager;
     
     void Awake ()
     {
@@ -34,28 +35,100 @@ public class PlayerController : MonoBehaviour
         
         anim = GetComponentInChildren <Animator> ();
         playerRigidbody = GetComponent <Rigidbody> ();
-    }
-
-    private void Start()
-    {
-        robot1Stay = false;
-        robot2Stay = false;
-        robot3Stay = false;
+        _stateManager = GameObject.Find("/StateManager").GetComponent<StateManager>();
     }
 
     void Update()
     {
         Turning();
+        if (Input.GetKeyDown("space"))
+        {
+            foundHealTarget = false;
+        }
+        if (Input.GetKey("space") && _stateManager.boltCount > 0)
+        {
+            // find robot to heal first
+            if (!foundHealTarget)
+            {
+                RobotController closestRobot = robots[0];
+                float closestDist = 20000;
+                foreach (var robot in robots)
+                {
+                    if (robot.GetComponent<Health>().currHealth > 0)
+                    {
+                        float dist = Vector3.Distance(robot.transform.position, transform.position);
+                        if (closestDist > dist)
+                        {
+                            closestDist = dist;
+                            closestRobot = robot;
+                        }
+                    }
+                }
+                if (closestDist <= healRange)
+                {
+                    foundHealTarget = true;
+                    healTarget = closestRobot.GetComponent<Health>();
+                    // tell robot to stop
+                    closestRobot.isHealing = true;
+                }
+            }
+            
+            if (foundHealTarget && healTarget.currHealth < healTarget.maxHealth)
+            {
+                // Start heal
+                healing = true;
+                Vector3 robotPos = healTarget.transform.position;
+                Vector3 healPos = robotPos + (transform.position - robotPos).normalized * 0.7f;
+                if (Vector3.Distance(healPos, transform.position) > 0.05f)
+                {
+                    transform.position =
+                        Vector3.SmoothDamp(transform.position, healPos, ref _healMoveVelocity, Time.deltaTime * 10);
+                }
+                
+                transform.LookAt(new Vector3(robotPos.x, transform.position.y, robotPos.z));
+
+                // TODO: add repairing animation
+
+                if (_currHealTime <= 0)
+                {
+                    // heal
+                    healTarget.Heal(healAmount);
+                    _stateManager.boltCount--;
+                    _currHealTime = healTime;
+                }
+
+                _currHealTime -= Time.deltaTime;
+            }
+        }
+        else
+        {
+            StopHealing();
+        }
     }
 
+    void StopHealing()
+    {
+        foundHealTarget = false;
+        healing = false;
+        foreach (var robot in robots)
+        {
+            robot.isHealing = false;
+        }
+        _currHealTime = healTime;
+    }
 
     void FixedUpdate ()
     {
-        float h = Input.GetAxisRaw ("Horizontal");
-        float v = Input.GetAxisRaw ("Vertical");
+        float h = 0;
+        float v = 0;
+        if (!healing)
+        {
+            h = Input.GetAxisRaw ("Horizontal");
+            v = Input.GetAxisRaw ("Vertical");
 
-        Move (h, v);
-
+            Move (h, v);
+        }
+        
         Animating (h, v);
     }
 
@@ -107,47 +180,17 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown("1"))
         {
-            robot1Stay = !robot1Stay;
-            if (robot1Stay)
-            {
-                crossHair1.GetComponent<crossHairPos>().setPos(targetPosition);
-                robot1.GetComponent<RobotController>().stayAtPosition(targetPosition);
-            }
-            else
-            {
-                crossHair1.GetComponent<crossHairPos>().cancelSetPos();
-                robot1.GetComponent<RobotController>().freePosition();
-            }
+            robots[0].MoveOrder(targetPosition);
         }
 
         if (Input.GetKeyDown("2"))
         {
-            robot2Stay = !robot2Stay;
-            if (robot2Stay)
-            {
-                crossHair2.GetComponent<crossHairPos>().setPos(targetPosition);
-                robot2.GetComponent<RobotController>().stayAtPosition(targetPosition);
-            }
-            else
-            {
-                crossHair2.GetComponent<crossHairPos>().cancelSetPos();
-                robot2.GetComponent<RobotController>().freePosition();
-            }
+            robots[1].MoveOrder(targetPosition);
         }
         
         if (Input.GetKeyDown("3"))
         {
-            robot3Stay = !robot3Stay;
-            if (robot3Stay)
-            {
-                crossHair3.GetComponent<crossHairPos>().setPos(targetPosition);
-                robot3.GetComponent<RobotController>().stayAtPosition(targetPosition);
-            }
-            else
-            {
-                crossHair3.GetComponent<crossHairPos>().cancelSetPos();
-                robot3.GetComponent<RobotController>().freePosition();
-            }
+            robots[2].MoveOrder(targetPosition);
         }
     }
     
