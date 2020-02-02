@@ -41,7 +41,7 @@ public class EnemyLauncher : MonoBehaviour
             }
             if (_currCooldown <= 0.0f)
             {
-                if (Random.Range(0, 5) == 0)
+                if (Random.Range(0, 10) == 0)
                 {
                     Shoot();
                     _currCooldown = shootMaxCooldown;

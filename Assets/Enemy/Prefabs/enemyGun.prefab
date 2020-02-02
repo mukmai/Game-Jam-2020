@@ -175,6 +175,7 @@ MonoBehaviour:
   room: {fileID: 0}
   agent: {fileID: 4963940191470737667}
   isSleeping: 1
+  isUsingSkill: 0
 --- !u!114 &4963940191470737725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,10 +188,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18ec71f8677192d4f93f72b3e2f7f1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBarPrefab: {fileID: 5850903189238375849, guid: 5b50b0ae2c4d1394ebc1cb8f2f8cd311,
+  healthBarPrefab: {fileID: 5850903189238375849, guid: 1ee81067daafe064aa0c6316181f28b5,
     type: 3}
   maxHealth: 100
   currHealth: 0
+  yOffset: 1
 --- !u!136 &4963940191470737666
 CapsuleCollider:
   m_ObjectHideFlags: 0

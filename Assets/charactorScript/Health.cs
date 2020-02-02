@@ -13,6 +13,7 @@ public class Health : MonoBehaviour
     public int maxHealth = 100;
     public int currHealth;
     private Image _bar;
+    public float yOffset = 1;
 
     private Animator _animator;
 
@@ -35,7 +36,7 @@ public class Health : MonoBehaviour
     {
         if (_initialized)
         {
-            _healthBar.transform.position = transform.position + Vector3.up;
+            _healthBar.transform.position = transform.position + Vector3.up * yOffset;
             _healthBar.transform.rotation = Quaternion.identity;
         }
     }
