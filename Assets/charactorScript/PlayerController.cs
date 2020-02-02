@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour
                 transform.LookAt(new Vector3(robotPos.x, transform.position.y, robotPos.z));
 
                 // TODO: add repairing animation
+                anim.SetBool("isRepair",true);
 
                 if (_currHealTime <= 0)
                 {
@@ -120,12 +121,14 @@ public class PlayerController : MonoBehaviour
             else if (foundHealTarget && healTarget.currHealth == healTarget.maxHealth)
             {
                 StopHealing();
+                anim.SetBool("isRepair",false);
             }
             
         }
         else
         {
             StopHealing();
+            anim.SetBool("isRepair",false);
         }
         
         healthBarPrefab.fillAmount = GetComponent<Health>().SendHp();
@@ -232,6 +235,28 @@ public class PlayerController : MonoBehaviour
         if (other.gameObject.layer == LayerMask.NameToLayer("Lava"))
         {
             GetComponent<Health>().TakeDamage(100);
+        }
+        
+        if (other.gameObject.layer == LayerMask.NameToLayer("treasure"))
+        {
+            if (other.gameObject.name == "Shield1")
+            {
+                GameObject obj = GameObject.Find("/robot1_gun/robot1/B/robotShield");
+                obj.SetActive(true);
+                Destroy(other.gameObject);
+            }
+            if (other.gameObject.name == "Shield2")
+            {
+                GameObject obj = GameObject.Find("/robot2_gun/robot2/B/robotShield");
+                obj.SetActive(true);
+                Destroy(other.gameObject);
+            }
+            if (other.gameObject.name == "Shield3")
+            {
+                GameObject obj = GameObject.Find("/robot3_gun/robot3/B/robotShield");
+                obj.SetActive(true);
+                Destroy(other.gameObject);
+            }
         }
     }
 }

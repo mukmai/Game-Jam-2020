@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Health : MonoBehaviour
@@ -52,6 +53,9 @@ public class Health : MonoBehaviour
                 {
                     // TODO: game over
                     _animator.SetBool("isDead",true);
+                    GameObject obj = GameObject.Find("/LevelManager");
+                    obj.GetComponent<ChangeScene>().showLoseUI();
+                    Debug.Log("fuund");
                 }
                 else
                 {

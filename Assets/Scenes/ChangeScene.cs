@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ChangeScene : MonoBehaviour
 {
+    public Button loseButton;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -14,8 +17,13 @@ public class ChangeScene : MonoBehaviour
     // Update is called once per frame
     public void NextScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        SceneManager.LoadScene(1);
     }
-    
+
+    public void showLoseUI()
+    {
+        Debug.Log("setactive");
+        loseButton.gameObject.SetActive(true);
+    }
     
 }
