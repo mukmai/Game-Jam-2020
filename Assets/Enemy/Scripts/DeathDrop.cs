@@ -26,7 +26,8 @@ public class DeathDrop : MonoBehaviour
             currBolt.velocity = Random.Range(0.5f, 1.0f) * currBolt.transform.forward;
         }
 
+        GetComponent<EnemyMovement>().isSleeping = true;
         GetComponent<Collider>().enabled = false;
-        Destroy(gameObject, 1);
+        Destroy(gameObject);
     }
 }
