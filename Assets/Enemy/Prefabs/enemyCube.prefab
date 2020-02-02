@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4186259583234062897}
   - component: {fileID: 3527441417464417768}
   - component: {fileID: 747656100879619535}
+  - component: {fileID: 3805848666385862604}
   m_Layer: 0
   m_Name: enemyCube
   m_TagString: Untagged
@@ -85,6 +86,25 @@ MonoBehaviour:
   room: {fileID: 0}
   agent: {fileID: 0}
   isSleeping: 1
+  isUsingSkill: 0
+--- !u!114 &3805848666385862604
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4186259583234062898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd5c11cdeee99d64898fd6c69361e07d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boltPrefab: {fileID: 3696477675588038683, guid: e140b6b7b14a97d4b81172a6b1e90fbc,
+    type: 3}
+  minDrop: 25
+  maxDrop: 25
+  explodePrefab: {fileID: 8435033707355259451, guid: 6d63c65882636814284a281e93155f4b,
+    type: 3}
 --- !u!1001 &4186259583507866460
 PrefabInstance:
   m_ObjectHideFlags: 0

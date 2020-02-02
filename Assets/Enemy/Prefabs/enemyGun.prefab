@@ -223,6 +223,8 @@ MonoBehaviour:
     type: 3}
   minDrop: 3
   maxDrop: 5
+  explodePrefab: {fileID: 8435033707355259451, guid: 6d63c65882636814284a281e93155f4b,
+    type: 3}
 --- !u!1001 &4963940191162699815
 PrefabInstance:
   m_ObjectHideFlags: 0

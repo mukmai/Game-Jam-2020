@@ -33,6 +33,7 @@ GameObject:
   - component: {fileID: 1208632761421880630}
   - component: {fileID: 550169224272595238}
   - component: {fileID: 7324969307771198046}
+  - component: {fileID: -3998776392663368626}
   m_Layer: 9
   m_Name: enemyFly
   m_TagString: Untagged
@@ -143,6 +144,24 @@ MonoBehaviour:
   bulletVelocity: 8
   body: {fileID: 1208632761421880630}
   nextSpinCooldown: 1.2
+--- !u!114 &-3998776392663368626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6225203880810034956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bd5c11cdeee99d64898fd6c69361e07d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  boltPrefab: {fileID: 3696477675588038683, guid: e140b6b7b14a97d4b81172a6b1e90fbc,
+    type: 3}
+  minDrop: 3
+  maxDrop: 5
+  explodePrefab: {fileID: 8435033707355259451, guid: 6d63c65882636814284a281e93155f4b,
+    type: 3}
 --- !u!1001 &6225203879227705474
 PrefabInstance:
   m_ObjectHideFlags: 0

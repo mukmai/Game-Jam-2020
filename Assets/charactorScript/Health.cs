@@ -71,7 +71,7 @@ public class Health : MonoBehaviour
                 RoomManager room = GetComponent<EnemyMovement>().room;
                 if (room)
                     room.EnemyDead();
-                Destroy(gameObject);
+                gameObject.GetComponent<DeathDrop>().Die();
             }
         }
     }
