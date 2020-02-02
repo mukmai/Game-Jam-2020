@@ -25,6 +25,8 @@ public class DeathDrop : MonoBehaviour
             Rigidbody currBolt = Instantiate(boltPrefab, transform.position, transform.rotation * Quaternion.Euler(30, Random.Range(0, 360), 0)).GetComponent<Rigidbody>();
             currBolt.velocity = Random.Range(0.5f, 1.0f) * currBolt.transform.forward;
         }
+
+        GetComponent<Collider>().enabled = false;
         Destroy(gameObject, 1);
     }
 }

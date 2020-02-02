@@ -12,14 +12,10 @@ public class StateManager : MonoBehaviour
     private List<Health> survivers = new List<Health>();
 
     public Text boltText;
-    
-    
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
+    public GameObject tvPrefab;
+    
+    
     // Update is called once per frame
     void Update()
     {
@@ -54,6 +50,24 @@ public class StateManager : MonoBehaviour
     public void WinGame()
     {
         // TODO: do shit here
+        
+        StartCoroutine(GenTvCoroutine());
+        
+        
         Debug.Log("WOW");
     }
+    
+    IEnumerator GenTvCoroutine()
+    {
+        for(int i = 0; i< 50;i++)
+        {
+            Instantiate(tvPrefab, player.transform.position + Vector3.up*10, Quaternion.Euler(0,Random.Range(0,360),0));
+            
+            yield return new WaitForSeconds(0.3f);
+        }
+
+        yield return null;
+    }
+    
+
 }
