@@ -50,4 +50,10 @@ public class StateManager : MonoBehaviour
 
         return res;
     }
+
+    public void WinGame()
+    {
+        // TODO: do shit here
+        Debug.Log("WOW");
+    }
 }

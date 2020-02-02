@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3527441417464417768}
   - component: {fileID: 747656100879619535}
   - component: {fileID: 3805848666385862604}
+  - component: {fileID: 6435312149655017387}
   m_Layer: 0
   m_Name: enemyCube
   m_TagString: Untagged
@@ -57,7 +58,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 4186259583234062898}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 1.25
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
@@ -67,7 +68,7 @@ NavMeshAgent:
   m_AutoBraking: 1
   m_AutoRepath: 1
   m_Height: 2
-  m_BaseOffset: 0
+  m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
 --- !u!114 &747656100879619535
@@ -105,6 +106,18 @@ MonoBehaviour:
   maxDrop: 25
   explodePrefab: {fileID: 8435033707355259451, guid: 6d63c65882636814284a281e93155f4b,
     type: 3}
+--- !u!114 &6435312149655017387
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4186259583234062898}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2b85325484b93c41a8837217d4cc950, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &4186259583507866460
 PrefabInstance:
   m_ObjectHideFlags: 0

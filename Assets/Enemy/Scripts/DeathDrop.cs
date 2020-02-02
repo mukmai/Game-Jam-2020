@@ -13,14 +13,18 @@ public class DeathDrop : MonoBehaviour
     
     public void Die()
     {
-        // TODO: explode
-        Instantiate(explodePrefab, transform.position, Quaternion.identity);
+        GameObject explode = Instantiate(explodePrefab, transform.position, Quaternion.identity);
+        if (maxDrop > 20)
+        {
+            explode.transform.localScale = Vector3.one * 0.65f;
+        }
+        
         
         for (int i = 0; i < Random.Range(minDrop, maxDrop + 1); i++)
         {
             Rigidbody currBolt = Instantiate(boltPrefab, transform.position, transform.rotation * Quaternion.Euler(30, Random.Range(0, 360), 0)).GetComponent<Rigidbody>();
             currBolt.velocity = Random.Range(0.5f, 1.0f) * currBolt.transform.forward;
         }
-        Destroy(gameObject);
+        Destroy(gameObject, 1);
     }
 }
