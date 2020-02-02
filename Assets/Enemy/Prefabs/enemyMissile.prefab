@@ -28,7 +28,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4466995464688297960}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GunHead
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,6 +123,7 @@ MonoBehaviour:
   room: {fileID: 0}
   agent: {fileID: 4466995465114406918}
   isSleeping: 1
+  isUsingSkill: 0
 --- !u!114 &4466995465114406916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,10 +136,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18ec71f8677192d4f93f72b3e2f7f1c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBarPrefab: {fileID: 5850903189238375849, guid: 5b50b0ae2c4d1394ebc1cb8f2f8cd311,
+  healthBarPrefab: {fileID: 5850903189238375849, guid: 1ee81067daafe064aa0c6316181f28b5,
     type: 3}
   maxHealth: 100
   currHealth: 0
+  yOffset: 1
 --- !u!136 &4466995465114406913
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -169,6 +171,8 @@ MonoBehaviour:
     type: 3}
   minDrop: 3
   maxDrop: 5
+  explodePrefab: {fileID: 8435033707355259451, guid: 6d63c65882636814284a281e93155f4b,
+    type: 3}
 --- !u!95 &4466995464290918483
 Animator:
   serializedVersion: 3
@@ -200,15 +204,30 @@ PrefabInstance:
       propertyPath: m_Name
       value: enemyMissile
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: 723a934ecbee73441959adaac2a8a4d5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: -7904721589644796742, guid: 723a934ecbee73441959adaac2a8a4d5,
         type: 3}
       propertyPath: m_Name
       value: B
       objectReference: {fileID: 0}
+    - target: {fileID: -7904721589644796742, guid: 723a934ecbee73441959adaac2a8a4d5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: -4837623435779820588, guid: 723a934ecbee73441959adaac2a8a4d5,
         type: 3}
       propertyPath: m_Name
       value: H
+      objectReference: {fileID: 0}
+    - target: {fileID: -4837623435779820588, guid: 723a934ecbee73441959adaac2a8a4d5,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 723a934ecbee73441959adaac2a8a4d5,
         type: 3}

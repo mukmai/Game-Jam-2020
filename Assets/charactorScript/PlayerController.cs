@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
     public int healAmount = 10;
     public float healTime = 0.5f;
     private float _currHealTime = 0.5f;
+
+    public int shieldPrice = 20;
     
     private bool _shiftClicked = false;
     public Image healthBarPrefab;
@@ -104,8 +106,7 @@ public class PlayerController : MonoBehaviour
                 }
                 
                 transform.LookAt(new Vector3(robotPos.x, transform.position.y, robotPos.z));
-
-                // TODO: add repairing animation
+                
                 anim.SetBool("isRepair",true);
 
                 if (_currHealTime <= 0)
@@ -239,20 +240,23 @@ public class PlayerController : MonoBehaviour
         
         if (other.gameObject.layer == LayerMask.NameToLayer("treasure"))
         {
-            if (other.gameObject.name == "Shield1")
+            if (other.gameObject.name == "Shield1" && _stateManager.boltCount >= shieldPrice)
             {
+                _stateManager.boltCount -= 10;
                 GameObject obj = GameObject.Find("/robot1_gun/robot1/B/robotShield");
                 obj.SetActive(true);
                 Destroy(other.gameObject);
             }
-            if (other.gameObject.name == "Shield2")
+            if (other.gameObject.name == "Shield2" && _stateManager.boltCount >= shieldPrice)
             {
+                _stateManager.boltCount -= 10;
                 GameObject obj = GameObject.Find("/robot2_gun/robot2/B/robotShield");
                 obj.SetActive(true);
                 Destroy(other.gameObject);
             }
-            if (other.gameObject.name == "Shield3")
+            if (other.gameObject.name == "Shield3" && _stateManager.boltCount >= shieldPrice)
             {
+                _stateManager.boltCount -= 10;
                 GameObject obj = GameObject.Find("/robot3_gun/robot3/B/robotShield");
                 obj.SetActive(true);
                 Destroy(other.gameObject);

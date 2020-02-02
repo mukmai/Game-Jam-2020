@@ -19,5 +19,10 @@ public class BallBullet : MonoBehaviour
             // TODO: add explosion
             Destroy(gameObject);
         }
+        if (other.gameObject.layer == LayerMask.NameToLayer("Shield"))
+        {
+            // TODO: add explosion
+            Destroy(gameObject);
+        }
     }
 }
